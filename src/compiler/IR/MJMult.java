@@ -52,9 +52,21 @@ public class MJMult extends MJBinaryOp {
 	}
 
 	public void generateCode(CODE code) throws CodeGenException {
-
 		LC3label cont = code.newLabel();
+		
 		code.comment(" MULT BEGIN ");
+		code.commentline("lhs");
+		this.lhs.generateCode(code);
+		code.commentline("rhs");
+		this.rhs.generateCode(code);
+		
+		code.commentline("Multiplication");
+		code.pop2(CODE.TMP0, CODE.TMP1);
+		code.add(cont);
+		code.add(new LC3ADD(CODE.TMP0, CODE.TMP0, CODE.TMP0));
+		code.add(new LC3ADD(CODE.TMP1, CODE.TMP1, -1));
+		code.add(new LC3BRP(cont));
+		code.push(CODE.TMP0);
 		code.comment(" MULT END ");
 	}
 
