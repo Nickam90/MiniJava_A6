@@ -60,6 +60,9 @@ public class MJMult extends MJBinaryOp {
 		code.commentline("rhs");
 		this.rhs.generateCode(code);
 		
+//		 Hvis det er forkert, kald multi subroutine el. tilf¿j NOT(TMP1)!
+		
+		
 		code.commentline("Multiplication");
 		code.pop2(CODE.TMP0, CODE.TMP1);
 		code.add(cont);
