@@ -51,6 +51,17 @@ public class MJMinus extends MJBinaryOp {
 
 	public void generateCode(CODE code) throws CodeGenException {
 		code.comment(" MINUS BEGIN ");
+		code.commentline("lhs");
+		this.lhs.generateCode(code);
+		code.commentline("rhs");
+		this.rhs.generateCode(code);
+		
+		code.commentline("substract");
+		code.pop2( CODE.TMP0, CODE.TMP1);
+		code.add(new LC3NOT(CODE.TMP1, CODE.TMP1));
+		code.add(new LC3ADD(CODE.TMP1, CODE.TMP1, 1));
+		code.add(new LC3ADD(CODE.TMP0, CODE.TMP0, CODE.TMP1));
+		code.push(CODE.TMP0);
 		code.comment(" MINUS END ");
 	}
 
