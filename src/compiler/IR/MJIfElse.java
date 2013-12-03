@@ -79,13 +79,13 @@ public class MJIfElse extends MJIf {
 		LC3label mid = code.newLabel();		
 		
 		code.comment(" IF/ELSE ");
-		super.generateCode(code);
-//		super.getCondition().generateCode(code);
-		code.pop(CODE.TMP1);
-		code.add(new LC3BRNP(end));
+		super.getCondition().generateCode(code);
+		code.pop(CODE.TMP0);
+		code.add(new LC3BRZ(mid));
+		super.getThenblock().generateCode(code);
+		code.add(new LC3BR(end));
+		code.add(mid);
 		this.elseblock.generateCode(code);
-		code.pop(CODE.TMP1);
-		code.push(CODE.TMP1);
 		code.add(end);
 		code.comment(" IF/ELSE END ");
 	}

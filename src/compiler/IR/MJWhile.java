@@ -74,16 +74,12 @@ public class MJWhile extends MJStatement {
 		LC3label mid = code.newLabel();
 		
 		code.comment(" WHILE BEGIN ");
+		code.add(mid);
 		this.condition.generateCode(code);
 		code.pop(CODE.TMP0);
-		code.push(CODE.TMP0);
 		code.add(new LC3BRZ(end));
-		code.add(mid);
 		this.body.generateCode(code);
-		code.pop(CODE.TMP1);
-		code.push(CODE.TMP1);
-		code.pop(CODE.TMP0);
-		code.add(new LC3BRP(mid));
+		code.add(new LC3BR(mid));
 		code.add(end);
 		code.comment(" WHILE END");
 	}

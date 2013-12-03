@@ -77,12 +77,9 @@ public class MJIf extends MJStatement {
 		
 		code.comment(" IF ");
 		this.condition.generateCode(code);
-//		this.thenblock.generateCode(code);
 		code.pop(CODE.TMP0);
 		code.add(new LC3BRZ(cont));
 		this.thenblock.generateCode(code);
-		code.pop(CODE.TMP1);
-		code.push(CODE.TMP1);
 		code.add(cont);
 		code.comment(" IF END ");
 	}
