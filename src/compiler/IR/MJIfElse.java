@@ -75,8 +75,18 @@ public class MJIfElse extends MJIf {
 	}
 
 	public void generateCode(CODE code) throws CodeGenException {
+		LC3label end = code.newLabel();
+		LC3label mid = code.newLabel();		
 		
 		code.comment(" IF/ELSE ");
+		super.generateCode(code);
+//		super.getCondition().generateCode(code);
+		code.pop(CODE.TMP1);
+		code.add(new LC3BRNP(end));
+		this.elseblock.generateCode(code);
+		code.pop(CODE.TMP1);
+		code.push(CODE.TMP1);
+		code.add(end);
 		code.comment(" IF/ELSE END ");
 	}
 }
