@@ -683,7 +683,7 @@ public class MJProgram extends IR {
 		code.add( new LC3TRAP(0x22));
 		code.add( new LC3TRAP(0x25));
 		code.add( npeerrmsg);
-		code.add( new LC3string("Null pointer exception\n"));
+		code.add( new LC3string("Null pointer exception\\n"));
 		
 		code.comment(" index out of bounds exception ");
 		code.commentline( " prints error message and exits");
@@ -695,7 +695,7 @@ public class MJProgram extends IR {
 		code.add( new LC3TRAP(0x22));
 		code.add( new LC3TRAP(0x25));
 		code.add( iooberrmsg);
-		code.add( new LC3string("Index out of bounds exception\n"));
+		code.add( new LC3string("Index out of bounds exception\\n"));
 
 		code.comment(" add two strings ");
 		code.commentline( " expects args on top of stack, puts result on stack");
