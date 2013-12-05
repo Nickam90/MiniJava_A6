@@ -143,8 +143,11 @@ public class MJProgram extends IR {
 
 	public void codeGen(CODE code) throws CodeGenException {
 
+		MJMethod entrypoint=null;
 		// compute size of classes
 
+		boolean verfirstmethod=true;
+		
 		for (MJClass c : this.classes) {
 
 			// compute size of classes
@@ -181,6 +184,10 @@ public class MJProgram extends IR {
 
 				LC3label l = code.newLabel();
 				m.setLabel(l);
+				
+				if (entrypoint==null) {
+					entrypoint=m;
+				}
 
 				// check whether the last statement is a return statement
 
@@ -263,7 +270,7 @@ public class MJProgram extends IR {
 		code.add(new LC3AND(CODE.CONST0, CODE.CONST0, 0));
 		code.add(new LC3ADD(CODE.CONST1, CODE.CONST0, 1));
 
-		LC3label cont = code.newLabel();
+		LC3label cont = entrypoint.getLabel();
 		LC3label data = code.newLabel();
 		LC3label heap = code.newLabel();
 	
@@ -306,7 +313,7 @@ public class MJProgram extends IR {
 			code.add(code.arguments);
 			code.add(new LC3int(0));
 		}
-		code.add(cont);
+		// code.add(cont);
 		
 		for (MJClass c : this.classes) {
 			IR.currentClass = c;
